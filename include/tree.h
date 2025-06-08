@@ -2,25 +2,36 @@
 #ifndef INCLUDE_TREE_H_
 #define INCLUDE_TREE_H_
 
-#pragma once
 #include <vector>
 #include <memory>
 
-struct PMNode {
-    char value;
-    std::vector<std::unique_ptr<PMNode>> children;
-
-    PMNode(char val) : value(val) {}
-};
-
 class PMTree {
-public:
-    std::unique_ptr<PMNode> root;
+ public:
+  struct Node {
+    char val;
+    std::vector<std::unique_ptr<Node>> children;
+    explicit Node(char v) : val(v) {}
+  };
 
-    PMTree(const std::vector<char>& elements);
+  explicit PMTree(const std::vector<char>& elems);
+  ~PMTree() = default;
 
-private:
-    std::unique_ptr<PMNode> buildTree(const std::vector<char>& elements);
+  std::vector<std::vector<char>> getAllPermutations() const;
+  std::vector<char> getPermutationByTraversal(int index) const;
+  std::vector<char> getPermutationByNavigation(int index) const;
+
+ private:
+  std::unique_ptr<Node> root_;
+  int total_permutations_;
+
+  void buildTree(Node* current, const std::vector<char>& remaining);
+  void gatherPermutations(const Node* node, std::vector<char>& path,
+                          std::vector<std::vector<char>>& output) const;
+  bool findPermutationByTraversal(const Node* node, int& count,
+                                  std::vector<char>& output) const;
+  bool findPermutationByNavigation(const Node* node, int count,
+                                   std::vector<char>& output) const;
+  int factorial(int n) const;
 };
 
 std::vector<std::vector<char>> getAllPerms(const PMTree& tree);
