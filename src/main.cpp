@@ -9,7 +9,7 @@ int main() {
   std::vector<char> inputChars = {'1', '2', '3'};
   PMTree tree(inputChars);
 
-  auto allPermutations = getAllPerms(tree);
+  auto allPermutations = tree.getAllPerms();
   std::cout << "All permutations:\n";
   for (const auto& perm : allPermutations) {
     for (char ch : perm) {
@@ -20,12 +20,12 @@ int main() {
 
   std::cout << "\nSelected permutations:\n";
   std::cout << "Permutation #1: ";
-  auto firstPerm = getPerm1(tree, 1);
+  auto firstPerm = tree.getPerm1(1);
   for (char ch : firstPerm) std::cout << ch;
   std::cout << '\n';
 
   std::cout << "Permutation #2: ";
-  auto secondPerm = getPerm2(tree, 2);
+  auto secondPerm = tree.getPerm2(2);
   for (char ch : secondPerm) std::cout << ch;
   std::cout << '\n';
 
