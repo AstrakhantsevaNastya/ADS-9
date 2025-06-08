@@ -16,13 +16,13 @@ class PMTree {
   explicit PMTree(const std::vector<char>& elems);
   ~PMTree() = default;
 
-  std::vector<std::vector<char>> getAllPermutations() const;
-  std::vector<char> getPermutationByTraversal(int index) const;
-  std::vector<char> getPermutationByNavigation(int index) const;
+  std::vector<std::vector<char>> getAllPerms() const;
+  std::vector<char> getPerm1(int index) const;
+  std::vector<char> getPerm2(int index) const;
 
  private:
-  std::unique_ptr<Node> root_;
-  int total_permutations_;
+  std::unique_ptr<Node> root;
+  int total_permutations;
 
   void buildTree(Node* current, const std::vector<char>& remaining);
   void gatherPermutations(const Node* node, std::vector<char>& path,
